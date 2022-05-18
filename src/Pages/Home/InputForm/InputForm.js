@@ -1,11 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
-const InputForm = () => {
+const InputForm = ({ refetch }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = (data) => {
@@ -20,6 +22,11 @@ const InputForm = () => {
     })
       .then((res) => res.json())
       .then((result) => {
+        if (result.insertedId) {
+          reset();
+          refetch();
+          toast.success("Task added successfully");
+        }
         console.log(result);
       });
   };
