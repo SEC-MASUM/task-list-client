@@ -1,26 +1,28 @@
 import React from "react";
 import TaskRow from "./TaskRow/TaskRow";
 
-const Tasks = () => {
+const Tasks = ({ tasks, refetch }) => {
   return (
     <div className="container mx-auto px-12">
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
-            <TaskRow />
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>
-                <div className="space-x-2">
-                  <button className="btn btn-sm btn-success">Success</button>
-                  <button className="btn btn-sm btn-error">Error</button>
-                </div>
-              </td>
-            </tr>
+            {tasks.map((task, index) => (
+              <TaskRow
+                refetch={refetch}
+                key={task._id}
+                index={index}
+                task={task}
+              />
+            ))}
           </tbody>
         </table>
       </div>
