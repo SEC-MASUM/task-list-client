@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import "react-toastify/dist/ReactToastify.css";
 
 // Create a client
 const queryClient = new QueryClient();
