@@ -13,7 +13,7 @@ const Home = () => {
     isLoading,
     refetch,
   } = useQuery("tasks", () =>
-    fetch(`http://localhost:5000/task/${user.email}`, {
+    fetch(`https://task-list-001.herokuapp.com/task/${user.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

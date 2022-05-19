@@ -5,7 +5,7 @@ const TaskRow = ({ task, index, refetch }) => {
   const { _id, title, description } = task;
 
   const handleDelete = (id) => {
-    const url = `http://localhost:5000/task/${id}`;
+    const url = `https://task-list-001.herokuapp.com/task/${id}`;
     fetch(url, {
       method: "DELETE",
       headers: {
@@ -22,7 +22,7 @@ const TaskRow = ({ task, index, refetch }) => {
   };
 
   const handleComplete = (id) => {
-    fetch(`http://localhost:5000/task/complete/${id}`, {
+    fetch(`https://task-list-001.herokuapp.com/task/complete/${id}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

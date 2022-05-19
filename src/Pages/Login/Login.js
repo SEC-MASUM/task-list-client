@@ -22,7 +22,7 @@ const Login = () => {
     const currentUser = { email: email };
     console.log(email, currentUser);
     if (email) {
-      const url = `http://localhost:5000/user/${email}`;
+      const url = `https://task-list-001.herokuapp.com/user/${email}`;
       fetch(url, {
         method: "PUT",
         headers: {
@@ -36,7 +36,6 @@ const Login = () => {
           const accessToken = data.accessToken;
           localStorage.setItem("accessToken", accessToken);
           setToken(accessToken);
-          
         });
     }
   }

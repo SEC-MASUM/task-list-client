@@ -19,7 +19,8 @@ const InputForm = ({ refetch }) => {
       title: data.title,
       description: data.description,
     };
-    const url = `http://localhost:5000/task/`;
+    // const url = `https://task-list-001.herokuapp.com/task/`;
+    const url = `https://task-list-001.herokuapp.com/task/`;
     fetch(url, {
       method: "POST",
       headers: {
