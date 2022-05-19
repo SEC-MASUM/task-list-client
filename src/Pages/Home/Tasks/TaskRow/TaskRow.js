@@ -8,6 +8,9 @@ const TaskRow = ({ task, index, refetch }) => {
     const url = `http://localhost:5000/task/${id}`;
     fetch(url, {
       method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -21,6 +24,9 @@ const TaskRow = ({ task, index, refetch }) => {
   const handleComplete = (id) => {
     fetch(`http://localhost:5000/task/complete/${id}`, {
       method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {

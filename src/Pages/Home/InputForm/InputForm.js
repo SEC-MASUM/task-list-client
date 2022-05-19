@@ -1,8 +1,11 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import auth from "../../../Firebase/Firebase.init";
 
 const InputForm = ({ refetch }) => {
+  const [user] = useAuthState(auth);
   const {
     register,
     handleSubmit,
@@ -11,14 +14,19 @@ const InputForm = ({ refetch }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    const url = `http://localhost:5000/task`;
+    const task = {
+      user: user.email,
+      title: data.title,
+      description: data.description,
+    };
+    const url = `http://localhost:5000/task/`;
     fetch(url, {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(task),
     })
       .then((res) => res.json())
       .then((result) => {
