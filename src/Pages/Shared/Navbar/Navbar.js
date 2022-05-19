@@ -1,17 +1,34 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../../Firebase/Firebase.init";
+import Loading from "../Loading/Loading";
 
 const Navbar = () => {
+  const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  const logout = () => {
+    signOut(auth);
+    localStorage.removeItem("accessToken");
+    navigate("/");
+  };
   const menuItems = (
     <>
+      {user && (
+        <li>
+          <span>{user.displayName}</span>
+        </li>
+      )}
       <li>
-        <a>Login</a>
-      </li>
-
-      <li>
-        <a>Sign Up</a>
-      </li>
-      <li>
-        <a>Sign Out</a>
+        <Link onClick={logout} to="/">
+          Sign Out
+        </Link>
       </li>
     </>
   );
@@ -43,9 +60,9 @@ const Navbar = () => {
             {menuItems}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl text-purple-600">
+        <button className="btn btn-ghost normal-case text-xl text-purple-600">
           <span className="uppercase font-bold">Task List</span>
-        </a>
+        </button>
       </div>
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
